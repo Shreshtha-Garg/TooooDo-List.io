@@ -1,0 +1,356 @@
+/* Default styles for buttons */
+.change-color-button {
+    cursor: pointer;
+}
+
+/* Animation keyframes */
+@keyframes changeColor {
+    0% {
+        background-color: inherit; 
+        transform: scale(1);
+        box-shadow: none;
+    }
+    50% {
+        background-color: rgba(96, 165, 250, 0.99); 
+        transform: scale(1.02); 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    }
+    100% {
+        background-color: rgba(96, 165, 250, 0.99); 
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
+/* Apply animation on button click */
+.change-color-button.clicked {
+    animation: changeColor 0.4s ease; 
+}
+
+/* CSS for cancel button  */
+
+@keyframes changeColorCancel {
+    0% {
+        transform: scale(1);
+        /* box-shadow: none; */
+    }
+    50% {
+        transform: scale(1.12); 
+        transform: rotateY(90deg);
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
+    }
+    100% {
+        transform: scale(1);
+        transform: rotateY(180deg);
+        /* box-shadow: none; */
+    }
+}
+
+/* Apply animation on button click */
+.change-color-button.cancel {
+    color: #CD5C5C;
+    animation: changeColorCancel 0.4s ease; 
+}
+#empty_task_notification {
+    transition: opacity 0.5s ease-in-out;
+}
+#empty_task_notification.show {
+    display: block;
+    opacity: 1;
+}
+#empty_task_notification.hide {
+    opacity: 0;
+}
+
+/* css for notification */
+.notification {
+    transition: opacity 0.5s ease, transform 0.3s ease;
+}
+
+/* Hidden state */
+.notification.hidden {
+    opacity: 0;
+    /* transform: translateY(-500px); */
+}
+/* css for radio button  */
+    .custom-radio {
+        --ring-width: 3px; /* Adjust the ring width as needed */
+        --ring-color: #677385; /* Adjust the ring color as needed */
+        width: 18.4px;
+        height: 18.4px;
+        /* width: 1.15rem;
+        height: 1.15rem; */
+        padding : 3px 6.7px;
+        appearance: var(--ring-color);
+        background-color: #c6c6c6;
+        border: 3px solid rgba(74, 85, 104, 0.9);
+        border-radius: 9999px; /* Use a large value for a circle */
+        outline: none;
+        transition: box-shadow 0.2s ease-in-out;
+        cursor: pointer;
+    }
+    .custom-radio:focus {
+        /* outline: none; */
+        box-shadow: 0 0 0 var(--ring-width) var(--ring-color);
+    }
+    
+        /* outline: none; */
+        .custom-radio:checked {
+            background-color: #718096; /* Gray background color when checked */
+            border-color: #4A5568; /* Darker gray border color when checked */
+            box-shadow: 0 0 0 3px #4A5568; /* Darker gray box shadow when checked */
+        }
+        
+/* animation for adding gifs */
+@keyframes fadeOut {
+    0%{
+        display: none;
+        opacity: 0;
+    }
+    1% {
+        display: flex;
+        opacity:1;
+        }
+    100% {
+       display: none;
+       opacity: 0;
+    }
+  }
+.gifFadeOut{animation: fadeOut 3s ease-in-out;}
+
+/* animation for deleting task from remaining tasks */
+@keyframes fadeout {
+    0%{
+        opacity: 1;
+    }
+    100% {
+       display: none;
+       opacity: 0;
+    }
+  }
+.fadeout{animation: fadeout 0.5s ease-in-out;}
+
+
+/* yaha se aage  */
+
+/* Edit Button Styles */
+.edit-button {
+    /* Margins and positioning */
+    margin-left: auto;
+    margin-right: 0.5rem;
+    
+    /* Background color matching primary button color */
+    background-color: #4b5567; /* bg-blue-500 */
+    
+    /* Text color */
+    color: white;
+    
+    /* Padding and border radius */
+    padding: 0.5rem 0.5rem; /* py-2 */
+    border: none;
+    border-radius: 0.75rem; /* rounded-md */
+    
+    /* Cursor and transitions */
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* this is needed to prevent svg from interfering in pointer event */
+.edit-button svg {
+    pointer-events: none; /* This ensures the button click is not blocked by the SVG */
+}
+@media (max-width: 640px) {
+    .edit-button {
+        margin-right:0;
+        padding-top:4px;
+        padding-bottom:4px;
+    }
+}
+.edit-button:hover {
+    /* Hover state background color */
+    background-color: #5f697d; /* bg-blue-600 */
+    
+    /* Hover state shadow */
+    box-shadow: 0 0 4px 4px rgba(75, 85, 99, 0.25); /* shadow-blue-600/25 */
+}
+/* Additional styling for modal */
+#edit_task_modal {
+    display: none; /* Hidden by default */
+}
+
+#edit_task_modal.show {
+    display: flex; /* Show modal when .show class is added */
+}
+
+/* Modal background */
+#edit_task_modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Textarea for editing task */
+#edit_task_textarea {
+    appearance: none;
+    min-height: 4rem;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    color: #cbd5e0; /* text-gray-200 */
+    margin-right: 0.75rem;
+    padding: 0.25rem 0.5rem; /* py-1 px-2 */
+    line-height: 1.5rem; /* leading-tight */
+    outline: none;
+    resize: none;
+}
+
+/* Buttons */
+#save_edit, #cancel_edit {
+    background-color: #4b73a5; 
+    padding: 12px 20px;
+    margin: 0px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 50%;
+    text-align: center;
+    display: inline-block;
+}
+
+#cancel_edit {
+    background-color: transparent; /* Red */
+}
+
+#save_edit:hover{
+    background-color: rgb(96 165 250 / 0.85);
+}
+
+/* #cancel_edit:hover { */
+    /* background-color: #e57373; */
+    /* color: red; */
+/* } */
+
+/* Show modal when the "show" class is added */
+#edit_task_modal.show {
+    display: flex;
+}
+
+/* Button styles and animations (shared) */
+.change-color-button {
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.change-color-button.saved {
+    animation: changeColor 0.4s ease;
+}
+
+.change-color-button.cancel {
+    color: #CD5C5C;
+    animation: changeColorCancel 0.4s ease;
+}
+
+@keyframes changeColor {
+    0% {
+        background-color: inherit; 
+        transform: scale(1);
+        box-shadow: none;
+    }
+    50% {
+        background-color: rgba(96, 165, 250, 0.99); 
+        transform: scale(1.02); 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    }
+    100% {
+        background-color: rgba(96, 165, 250, 0.99); 
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
+@keyframes changeColorCancel {
+    0% {
+        transform: scale(1);
+        color: #CD5C5C;
+    }
+    50% {
+        
+        color: #CD5C5C;
+        transform: scale(1.12); 
+        transform: rotateY(90deg);
+    }
+    100% {
+        color:#CD5C5C;
+        transform: scale(1);
+        transform: rotateY(180deg);
+    }
+    120%{
+            color:rgb(96 165 250 / 0.7);
+    }
+}
+
+/* Specific styles for save and cancel buttons in the edit modal */
+#cancel_edit, #save_edit {
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+ #save_edit:hover {
+    box-shadow: 0 0 4px 4px rgba(75, 85, 99, 0.25); /* shadow-blue-600/25 */
+}
+ #cancel_edit:hover {
+    color: #CD5C5C;
+}
+ 
+/* tooltip */
+/* Style for the custom tooltip */
+.tooltip {
+    position: relative;
+    cursor: pointer;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    background-color: #374151;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 4px;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+    bottom: 125%; /* Position the tooltip above the element */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+

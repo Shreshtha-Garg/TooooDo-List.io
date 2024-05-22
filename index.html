@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="checklist.png" type="image/x-icon">
+  <title>TooooDo List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-800 text-white w-full h-full ">
+  <div class="outer overflow-hidden w-full h-full relative">
+    <div>
+      <h1
+        class="lg:m-5 lg:mx-8 lg:p-4 sm:m-4 sm:p-4 m-3 p-3 lg:text-7xl min-[800px]:text-6xl text-5xl font-bold  text-white">
+        Tasks
+      </h1>
+    </div>
+    <div class="Remaining Tasks lg:m-5 lg:mx-8 lg:p-4 sm:m-4 sm:mx-4
+    sm:p-4 m-3 mx-1 p-3">
+      <h1 class="text-6xl max-sm:text-4xl max-[800px]:text-5xl text-gray-400 my-5">Remaining Tasks</h1>
+      <div id="Empty_todo" class="inner m-5 flex flex-col text-3xl text-gray-300">
+        <p class="my-6 mx-6"><img src="theres-nothing-to-do.jpg" alt="Nothing to do..."></p>
+      </div>
+      <!-- <img src="task done gifs\baby-scream-yeah-ezgif.com-video-to-gif-converter.gif" alt="qwerty"> -->
+      <div id="Non_empty" class="inner m-5 flex flex-col lg:text-3xl lg:leading-[2.65rem] sm:text-2xl text-xl text-gray-300  ">
+        <!-- <p class="p-3 my-3 bg-gray-700 rounded-full shadow-sm lg:shadow-md"><input type="radio" class="w-4 h-4 mx-3 cursor-pointer" id="1">
+          <label for="1">Some Task</label>
+        </p> -->
+      </div>
+    </div>
+    <div id="Completed_tasks_outer" class="CompletedTasks hidden lg:m-5 lg:mx-10 lg:p-4 sm:m-4 sm:mx-8
+    sm:p-4 m-3 mx-6 p-3 ">
+      <h1 class="text-6xl max-sm:text-4xl max-[800px]:text-5xl text-gray-400 my-5">Completed Tasks</h1>
+      <div id="CompletedTasks"
+        class="inner m-5 flex flex-col lg:text-3xl sm:text-2xl text-xl text-gray-500/80 line-through">
+        <!-- <p class="my-3 p-3 px-8 bg-gray-700 rounded-lg shadow-sm lg:shadow-md">Completed tasks
+        </p> -->
+      </div>
+    </div>
+    <!-- isko left kone me daal do -->
+    <div id="add_item"
+    class="z-[45] fixed bottom-9 right-14 flex h-12 w-12 rounded-full bg-[#3F679A] text-white justify-center items-center hover:bg-blue-400/85 hover:shadow-[0px_0px_4px_4px] hover:shadow-blue-400/25 change-color-button cursor-pointer tooltip"
+    data-tooltip="Add a new task">
+    <button class="">
+        <div class="icon align-middle rounded-full ">
+            <div class="plus text-3xl leading-5 font-bold pb-[6px] align-top">&#43;</div>
+        </div>
+    </button>
+</div>
+
+
+    <!-- Take user input for new task  -->
+    <div id="form" class="hidden">
+      <div
+        class="fixed w-full h-full z-50 top-0 flex justify-center items-center backdrop-blur-sm opacity-100 lg:text-lg">
+        <div class="flex justify-center items-center m-2">
+          <form class="min-w-[50vw] lg:min-h-52  bg-gray-700 p-8 rounded-lg shadow-md lg:shadow-lg">
+            <div class="flex items-center border-blue-400/50 py-2 lg:py-4">
+              <textarea id="new_note"
+                class="appearance-none max-h-40 lg:max-h-96 bg-transparent border-none w-full text-gray-200 mr-3 lg:my-8 py-1 px-2 leading-tight focus:outline-none resize-none"
+                placeholder="Input new task here" aria-label="Full name" oninput="resizeTextarea()"></textarea>
+              <button id="add_task"
+                class="change-color-button flex-shrink-0 hover:bg-blue-400/85 bg-blue-400/50 border-transparent text-sm border-4 text-white py-1 px-2 rounded lg:text-lg lg:py-2 lg:px-3 shadow-sm"
+                type="button">
+                Add task
+              </button>
+              <button id="cancel"
+                class=" change-color-button flex-shrink-0 border-transparent border-4 text-blue-400/70 hover:text-[#CD5C5C] text-sm py-1 px-2 rounded lg:text-lg lg:mx-3 lg:py-2"
+                type="button">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="task_added" class="hidden notification">
+      <div class="outer">
+        <div
+          class="fixed w-full h-full z-50 top-0 flex justify-center items-center backdrop-blur-sm opacity-100 lg:text-lg">
+          <div class="flex justify-center items-center m-2 bg-gray-700 rounded-xl shadow-lg">
+            <div class="m-5 p-5 lg:text-5xl sm:text-4xl text-3xl text-gray-300">Task added</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hidden gifFadeOut">
+      <div id="taskDone"
+        class="fixed w-full h-full z-[60] top-0 flex justify-center items-center backdrop-blur-sm opacity-100 lg:text-lg">
+      </div>
+    </div>
+  </div>
+  <div id="empty_task_notification" class="z-[100] hidden fixed top-20 left-1/2 transform -translate-x-1/2 p-4 bg-red-500 text-white rounded-lg shadow-lg">
+    Please enter a task!
+ </div>
+ 
+  <audio id="clickSound" src="task_done_sound.mp3" preload="auto"></audio>
+  <audio id="notification_sound" src="notification_sound.mp3" preload="auto"></audio>
+  <audio id="alert_notification_sound" src="alert_notification-sound.wav" preload="auto"></audio>
+  <div class="about-us-section ml-8 m-4">
+    <h2 class="text-4xl font-bold text-white my-6">About Us</h2>
+    <p class="text-base sm:text-lg lg:text-xl text-gray-300">This TooooDo List application was developed to help you manage your tasks efficiently and effectively.</p>
+    <p class=" sm:text-base lg:text-lg text-gray-200 mt-4">Credits:</p>
+    <ul class="text-xs sm:text-sm md:text-base list-disc list-inside text-gray-400">
+      <li>Developer : Shreshtha Garg</li>
+      <li>Framework : Tailwind CSS</li>
+    </ul>
+ </div> 
+ <div class="contact-us-section my-10 ml-8 m-4">
+  <h2 class="text-4xl font-bold text-white my-6">Contact Us</h2>
+  <p class="text-xl text-gray-300">Get in touch with the developer :</p>
+  <div class="flex items-center mt-4 space-x-6">
+      <a href="https://github.com/Shreshtha-Garg" target="_blank" class="text-gray-300 hover:text-white">
+          <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0C5.37 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.385.599.11.793-.26.793-.577v-2.173c-3.338.727-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.09-.744.082-.729.082-.729 1.205.084 1.84 1.238 1.84 1.238 1.07 1.834 2.809 1.304 3.495.998.108-.775.419-1.305.762-1.605-2.665-.305-5.467-1.336-5.467-5.945 0-1.314.469-2.388 1.236-3.23-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 0 1 3.003-.404c1.019.005 2.047.137 3.003.404 2.293-1.552 3.301-1.23 3.301-1.23.653 1.652.241 2.873.118 3.176.77.842 1.235 1.916 1.235 3.23 0 4.62-2.807 5.636-5.479 5.933.43.372.814 1.104.814 2.223v3.293c0 .32.192.694.801.576C20.565 21.796 24 17.297 24 12c0-6.627-5.373-12-12-12z"/>
+          </svg>
+      </a>
+      <a href="https://www.linkedin.com/in/shreshth-garg-3ba629208/" target="_blank" class="text-gray-300 hover:text-white">
+          <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.222c-.967 0-1.75-.791-1.75-1.75s.783-1.75 1.75-1.75c.966 0 1.75.791 1.75 1.75s-.784 1.75-1.75 1.75zm13.5 11.222h-3v-5.602c0-3.357-4-3.102-4 0v5.602h-3v-10h3v1.528c1.396-2.586 7-2.777 7 2.457v6.015z"/>
+          </svg>
+      </a>
+  </div>
+</div>
+
+<!-- Edit Task Modal -->
+<div id="edit_task_modal" class="fixed inset-0 items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="bg-gray-700 p-5 rounded-lg shadow-lg min-w-[75%] md:min-w-[50vw]">
+      <h2 class="text-xl md:text-2xl lg:text-3xl mb-4 text-white">Edit Task</h2>
+      <textarea id="edit_task_textarea" class="lg:text-lg appearance-none max-h-40 lg:max-h-96 bg-transparent border-none  w-full text-gray-200 py-1 px-2 leading-tight focus:outline-none resize-none " placeholder="Edit your task here" oninput="resizeTextareaEdit()"></textarea>
+      <div class="flex justify-end ">
+          <button id="cancel_edit" class="change-color-button flex-shrink-0 border-transparent text-blue-400/70 hover:text-[#CD5C5C] text-sm py-1 px-2 rounded lg:text-lg lg:mx-3 lg:py-2">Cancel</button>
+          <button id="save_edit" class="change-color-button flex-shrink-0 hover:bg-blue-400/85 bg-blue-400/50 border-transparent text-sm border-4 text-white py-1 px-2 rounded lg:text-lg lg:py-2 lg:px-3 shadow-sm">Save</button>
+      </div>
+  </div>
+</div>
+
+
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>
