@@ -7,7 +7,7 @@ This app allows you to create, edit, and delete tasks while utilizing local stor
 ## Table of Contents
 
 - [Features](#features)
-- [W](#web-app)
+- [Web App](#web-app)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
